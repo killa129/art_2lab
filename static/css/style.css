@@ -231,3 +231,136 @@ a {
     font-size: 28px;
   }
 }
+
+/* Форма поиска */
+.search-form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 40px;
+  max-width: 520px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 15px;
+  font-family: Arial, sans-serif;
+  border: 1px solid #e0d8c9;
+  background: #fff;
+  color: #1a1a1a;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: #8b6f47;
+}
+
+.search-form button {
+  padding: 12px 24px;
+  font-size: 15px;
+  font-family: Arial, sans-serif;
+  background: #1a1a1a;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.search-form button:hover {
+  background: #8b6f47;
+}
+
+.search-reset {
+  padding: 12px 0;
+  font-size: 14px;
+  color: #6b6b6b;
+  align-self: center;
+}
+
+.search-reset:hover {
+  color: #1a1a1a;
+}
+
+/* Тёмная тема */
+.theme-dark {
+  background: #1a1a1a;
+  color: #f0ebe1;
+}
+
+.theme-dark .site-header,
+.theme-dark .site-footer,
+.theme-dark .card-image,
+.theme-dark .painting-figure,
+.theme-dark .painting-facts li,
+.theme-dark .painting-author {
+  border-color: #333;
+}
+
+.theme-dark .card-image,
+.theme-dark .painting-figure {
+  background: #242424;
+}
+
+.theme-dark .nav a,
+.theme-dark .card-meta,
+.theme-dark .catalog-head p,
+.theme-dark .painting-author,
+.theme-dark .painting-back,
+.theme-dark .painting-facts .label,
+.theme-dark .site-footer .container,
+.theme-dark .search-reset {
+  color: #a0a0a0;
+}
+
+.theme-dark .nav a:hover,
+.theme-dark .painting-back:hover,
+.theme-dark .search-reset:hover {
+  color: #f0ebe1;
+}
+
+.theme-dark .search-input {
+  background: #242424;
+  border-color: #333;
+  color: #f0ebe1;
+}
+
+.theme-dark .search-form button {
+  background: #f0ebe1;
+  color: #1a1a1a;
+}
+
+.theme-dark .search-form button:hover {
+  background: #8b6f47;
+  color: #fff;
+}
+
+/* Кнопка переключения темы */
+.theme-toggle {
+  font-size: 14px;
+  color: #6b6b6b;
+}
+
+.theme-toggle:hover {
+  color: #1a1a1a;
+}
+
+.theme-dark .theme-toggle:hover {
+  color: #f0ebe1;
+}
+
+/* Блок недавно просмотренных */
+.recent {
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid #e0d8c9;
+}
+
+.theme-dark .recent {
+  border-color: #333;
+}
+
+.recent h2 {
+  font-family: Georgia, serif;
+  font-size: 28px;
+  font-weight: normal;
+  margin-bottom: 32px;
+}

@@ -1,18 +1,21 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ArtMuseum — Каталог</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body>
-
+<body class="{% if request.COOKIES.theme == 'dark' %}theme-dark{% endif %}">
   <header class="site-header">
     <div class="container">
-      <a href="index.html" class="logo">Art<span>Museum</span></a>
+      <a href="{% url 'index' %}" class="logo">Art<span>Museum</span></a>
       <nav class="nav">
-        <a href="index.html" class="active">Каталог</a>
+        <a href="{% url 'index' %}" class="active">Каталог</a>
+        <a href="{% url 'set_theme' %}?next={{ request.path }}" class="theme-toggle">
+          {% if request.COOKIES.theme == 'dark' %}Светлая{% else %}Темная{% endif %}
+        </a>
       </nav>
     </div>
   </header>
@@ -24,87 +27,48 @@
         <p>Двенадцать произведений мирового искусства — от эпохи Возрождения до начала XX века.</p>
       </div>
 
+      <form method="get" class="search-form">
+        {{ form.query }}
+        <button type="submit">Найти</button>
+        {% if request.GET.query %}
+          <a href="{% url 'index' %}" class="search-reset">Сбросить</a>
+        {% endif %}
+      </form>
+
+      {% if recent_paintings %}
+        <section class="recent">
+          <h2>Вы недавно смотрели</h2>
+          <div class="grid">
+            {% for painting in recent_paintings %}
+              <a class="card" href="{% url 'painting_detail' painting.id %}">
+                <div class="card-image">
+                  <img src="{% static painting.image %}" alt="{{ painting.title }}">
+                </div>
+                <div class="card-title">{{ painting.title }}</div>
+                <div class="card-meta">{{ painting.author }}, {{ painting.year }}</div>
+              </a>
+            {% endfor %}
+          </div>
+        </section>
+      {% endif %}
+
       <div class="grid">
-
-        <a class="card" href="painting-starry-night.html">
-          <div class="card-image"><img src="images/starry-night.jpg" alt="Звёздная ночь"></div>
-          <div class="card-title">Звёздная ночь</div>
-          <div class="card-meta">Винсент Ван Гог, 1889</div>
+        {% for painting in paintings %}
+        <a class="card" href="{% url 'painting_detail' painting.id %}">
+            <div class="card-image">
+              <img src="{% static painting.image %}" alt="{{ painting.title }}">
+            </div>
+            <div class="card-title">{{ painting.title }}</div>
+            <div class="card-meta">{{ painting.author }}, {{ painting.year }}</div>
         </a>
-
-        <a class="card" href="painting-mona-lisa.html">
-          <div class="card-image"><img src="images/mona-lisa.jpg" alt="Мона Лиза"></div>
-          <div class="card-title">Мона Лиза</div>
-          <div class="card-meta">Леонардо да Винчи, 1503–1519</div>
-        </a>
-
-        <a class="card" href="painting-the-kiss.html">
-          <div class="card-image"><img src="images/the-kiss.jpg" alt="Поцелуй"></div>
-          <div class="card-title">Поцелуй</div>
-          <div class="card-meta">Густав Климт, 1907–1908</div>
-        </a>
-
-        <a class="card" href="painting-water-lilies.html">
-          <div class="card-image"><img src="images/water-lilies.jpg" alt="Водяные лилии"></div>
-          <div class="card-title">Водяные лилии</div>
-          <div class="card-meta">Клод Моне, 1906</div>
-        </a>
-
-        <a class="card" href="painting-the-scream.html">
-          <div class="card-image"><img src="images/the-scream.jpg" alt="Крик"></div>
-          <div class="card-title">Крик</div>
-          <div class="card-meta">Эдвард Мунк, 1893</div>
-        </a>
-
-        <a class="card" href="painting-birth-of-venus.html">
-          <div class="card-image"><img src="images/birth-of-venus.jpg" alt="Рождение Венеры"></div>
-          <div class="card-title">Рождение Венеры</div>
-          <div class="card-meta">Сандро Боттичелли, 1485–1486</div>
-        </a>
-
-        <a class="card" href="painting-night-watch.html">
-          <div class="card-image"><img src="images/night-watch.jpg" alt="Ночной дозор"></div>
-          <div class="card-title">Ночной дозор</div>
-          <div class="card-meta">Рембрандт, 1642</div>
-        </a>
-
-        <a class="card" href="painting-blue-dancers.html">
-          <div class="card-image"><img src="images/blue-dancers.jpg" alt="Голубые танцовщицы"></div>
-          <div class="card-title">Голубые танцовщицы</div>
-          <div class="card-meta">Эдгар Дега, 1897</div>
-        </a>
-
-        <a class="card" href="painting-ninth-wave.html">
-          <div class="card-image"><img src="images/ninth-wave.jpg" alt="Девятый вал"></div>
-          <div class="card-title">Девятый вал</div>
-          <div class="card-meta">Иван Айвазовский, 1850</div>
-        </a>
-
-        <a class="card" href="painting-moonlight-night.html">
-          <div class="card-image"><img src="images/moonlight-night.jpg" alt="Лунная ночь на Днепре"></div>
-          <div class="card-title">Лунная ночь на Днепре</div>
-          <div class="card-meta">Архип Куинджи, 1880</div>
-        </a>
-
-        <a class="card" href="painting-demon-seated.html">
-          <div class="card-image"><img src="images/demon-seated.jpg" alt="Демон сидящий"></div>
-          <div class="card-title">Демон сидящий</div>
-          <div class="card-meta">Михаил Врубель, 1890</div>
-        </a>
-
-        <a class="card" href="painting-oath-of-horatii.html">
-          <div class="card-image"><img src="images/oath-of-horatii.jpg" alt="Клятва Горациев"></div>
-          <div class="card-title">Клятва Горациев</div>
-          <div class="card-meta">Жак-Луи Давид, 1784</div>
-        </a>
-
+        {% endfor %}
       </div>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <div>© 2026 ArtMuseum</div>
+      <div>2026 ArtMuseum</div>
       <div>Учебный проект</div>
     </div>
   </footer>
