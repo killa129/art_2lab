@@ -2,12 +2,14 @@ from django.shortcuts import render, redirect
 from .data import PAINTINGS
 from .forms import SearchForm
 
+from urllib.parse import quote, unquote
+
 
 def index(request):
     if request.GET:
         form = SearchForm(request.GET)
     else:
-        last_query = request.COOKIES.get("last_query", "")
+        last_query = unquote(request.COOKIES.get("last_query", "")) #last_query = request.COOKIES.get("last_query", "")
         form = SearchForm(initial={"query": last_query})
 
     paintings = PAINTINGS
@@ -44,7 +46,9 @@ def index(request):
 
     if form.is_valid() and form.cleaned_data.get("query"):
         response.set_cookie(
-            "last_query", form.cleaned_data["query"], max_age=60 * 60 * 24 * 7
+            "last_query",
+            quote(form.cleaned_data["query"]), #form.cleaned_data["query"],
+            max_age=60 * 60 * 24 * 7
         )
 
     return response

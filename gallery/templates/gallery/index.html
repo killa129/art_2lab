@@ -1,77 +1,91 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ArtMuseum — Каталог</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body class="{% if request.COOKIES.theme == 'dark' %}theme-dark{% endif %}">
-  <header class="site-header">
-    <div class="container">
-      <a href="{% url 'index' %}" class="logo">Art<span>Museum</span></a>
-      <nav class="nav">
-        <a href="{% url 'index' %}" class="active">Каталог</a>
-        <a href="{% url 'set_theme' %}?next={{ request.path }}" class="theme-toggle">
-          {% if request.COOKIES.theme == 'dark' %}Светлая{% else %}Темная{% endif %}
-        </a>
-      </nav>
-    </div>
-  </header>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArtMuseum - Каталог</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
 
-  <main class="catalog">
-    <div class="container">
-      <div class="catalog-head">
-        <h1>Коллекция</h1>
-        <p>Двенадцать произведений мирового искусства — от эпохи Возрождения до начала XX века.</p>
+  <body class="{% if request.COOKIES.theme == 'dark' %}theme-dark{% endif %}">
+
+    <header class="site-header">
+      <div class="container">
+
+        <a href="{% url 'index' %}" class="logo">Art Museum</a>
+
+        <nav class="nav">
+          <a href="{% url 'set_theme' %}?next={{ request.path }}" class="theme-toggle">
+            {% if request.COOKIES.theme == 'dark' %}Светлая{% else %}Темная{% endif %}
+          </a>
+        </nav>
+
       </div>
+    </header>
 
-      <form method="get" class="search-form">
-        {{ form.query }}
-        <button type="submit">Найти</button>
-        {% if request.GET.query %}
-          <a href="{% url 'index' %}" class="search-reset">Сбросить</a>
+    <main class="catalog">
+
+      <div class="container">
+
+        <div class="catalog-head">
+          <h1>Коллекция</h1>
+          <p>Двенадцать произведений мирового искусства - от эпохи Возрождения до начала XX века.</p>
+        </div>
+
+        <form method="get" class="search-form">
+          {{ form.query }}
+          <button type="submit">Найти</button>
+          {% if request.GET.query %}
+            <a href="{% url 'index' %}" class="search-reset">Сбросить</a>
+          {% endif %}
+        </form>
+
+        {% if recent_paintings %}
+          <section class="recent">
+
+            <h2>Вы недавно смотрели</h2>
+            <div class="grid">
+
+              {% for painting in recent_paintings %}
+                <a class="card" href="{% url 'painting_detail' painting.id %}">
+                  <div class="card-image">
+                    <img src="{% static painting.image %}" alt="{{ painting.title }}">
+                  </div>
+                  <div class="card-title">{{ painting.title }}</div>
+                  <div class="card-meta">{{ painting.author }}, {{ painting.year }}</div>
+                </a> 
+              {% endfor %}
+            </div>
+
+          </section>
         {% endif %}
-      </form>
 
-      {% if recent_paintings %}
-        <section class="recent">
-          <h2>Вы недавно смотрели</h2>
+        <section class="catalog-section">
+          <h2 class="section-title">Каталог</h2>
           <div class="grid">
-            {% for painting in recent_paintings %}
-              <a class="card" href="{% url 'painting_detail' painting.id %}">
+
+            {% for painting in paintings %}
+            <a class="card" href="{% url 'painting_detail' painting.id %}">
                 <div class="card-image">
                   <img src="{% static painting.image %}" alt="{{ painting.title }}">
                 </div>
                 <div class="card-title">{{ painting.title }}</div>
                 <div class="card-meta">{{ painting.author }}, {{ painting.year }}</div>
-              </a>
+            </a>
             {% endfor %}
+
           </div>
         </section>
-      {% endif %}
-
-      <div class="grid">
-        {% for painting in paintings %}
-        <a class="card" href="{% url 'painting_detail' painting.id %}">
-            <div class="card-image">
-              <img src="{% static painting.image %}" alt="{{ painting.title }}">
-            </div>
-            <div class="card-title">{{ painting.title }}</div>
-            <div class="card-meta">{{ painting.author }}, {{ painting.year }}</div>
-        </a>
-        {% endfor %}
       </div>
-    </div>
-  </main>
+    </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div>2026 ArtMuseum</div>
-      <div>Учебный проект</div>
-    </div>
-  </footer>
+    <footer class="site-footer">
+      <div class="container">
+        <div>Учебный проект</div>
+      </div>
+    </footer>
 
-</body>
+  </body>
 </html>

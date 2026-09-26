@@ -1,31 +1,40 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ painting.title }} — ArtMuseum</title>
+  <title>{{ painting.title }} - ArtMuseum</title>
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
+
 <body class="{% if request.COOKIES.theme == 'dark' %}theme-dark{% endif %}">
 
   <header class="site-header">
+
     <div class="container">
-      <a href="{% url 'index' %}" class="logo">Art<span>Museum</span></a>
+      <a href="{% url 'index' %}" class="logo">Art Museum</a>
+
       <nav class="nav">
-        <a href="{% url 'index' %}">Каталог</a>
         <a href="{% url 'set_theme' %}?next={{ request.path }}" class="theme-toggle">
           {% if request.COOKIES.theme == 'dark' %}Светлая{% else %}Темная{% endif %}
         </a>
       </nav>
     </div>
+
+    
+
   </header>
 
   <main class="painting">
+
     <div class="container">
+
       <a href="{% url 'index' %}" class="painting-back">← Назад к каталогу</a>
 
       <div class="painting-layout">
+
         <figure class="painting-figure">
           <img src="{% static painting.image %}" alt="{{ painting.title }}">
           <figcaption>{{ painting.author }}. {{ painting.title }}, {{ painting.year }}</figcaption>
@@ -48,13 +57,13 @@
             {% endfor %}
           </div>
         </div>
+        
       </div>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <div>© 2026 ArtMuseum</div>
       <div>Учебный проект</div>
     </div>
   </footer>

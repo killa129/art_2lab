@@ -6,16 +6,15 @@
 
 body {
   font-family: Arial, sans-serif;
-  background: #faf8f4;
-  color: #1a1a1a;
-  line-height: 1.6;
   font-size: 16px;
+  line-height: 1.6;
+  color: #1a1a1a;
+  background: #faf8f4;
 }
 
 img {
   display: block;
   max-width: 100%;
-  height: auto;
 }
 
 a {
@@ -29,7 +28,6 @@ a {
   padding: 0 24px;
 }
 
-/* Шапка */
 .site-header {
   border-bottom: 1px solid #e0d8c9;
 }
@@ -54,21 +52,48 @@ a {
 
 .nav a {
   font-size: 15px;
-  color: #6b6b6b;
 }
 
-.nav a:hover {
+.theme-toggle {
+  display: inline-block;
+  padding: 8px 18px;
+  font-size: 14px;
+  color: #fff;
+  background: #1a1a1a;
+  border: none;
+  cursor: pointer;
+}
+
+.theme-dark .theme-toggle {
   color: #1a1a1a;
+  background: #f0ebe1;
+  border-color: #f0ebe1;
 }
 
-/* Каталог */
+.search-form button {
+  padding: 12px 24px;
+  font: 15px Arial, sans-serif;
+  color: #fff;
+  background: #1a1a1a;
+  border: none;
+  cursor: pointer;
+}
+
+.search-form button:hover {
+  background: #8b6f47;
+}
+
+
+
+
+
 .catalog {
   padding: 60px 0 80px;
 }
 
 .catalog-head {
-  margin-bottom: 48px;
   max-width: 640px;
+  margin-bottom: 48px;
 }
 
 .catalog-head h1 {
@@ -79,8 +104,8 @@ a {
 }
 
 .catalog-head p {
-  color: #6b6b6b;
   font-size: 17px;
+  color: #6b6b6b;
 }
 
 .grid {
@@ -91,10 +116,10 @@ a {
 
 .card-image {
   aspect-ratio: 4 / 5;
-  overflow: hidden;
+  margin-bottom: 16px;
   background: #f2ede4;
   border: 1px solid #e0d8c9;
-  margin-bottom: 16px;
+  overflow: hidden;
 }
 
 .card-image img {
@@ -119,16 +144,15 @@ a {
   color: #8b6f47;
 }
 
-/* Страница картины */
 .painting {
   padding: 60px 0 100px;
 }
 
 .painting-back {
   display: inline-block;
+  margin-bottom: 40px;
   font-size: 14px;
   color: #6b6b6b;
-  margin-bottom: 40px;
 }
 
 .painting-back:hover {
@@ -143,9 +167,9 @@ a {
 }
 
 .painting-figure {
+  padding: 20px;
   background: #f2ede4;
   border: 1px solid #e0d8c9;
-  padding: 20px;
 }
 
 .painting-figure img {
@@ -153,9 +177,9 @@ a {
 }
 
 .painting-figure figcaption {
+  margin-top: 12px;
   font-size: 13px;
   color: #6b6b6b;
-  margin-top: 12px;
   text-align: center;
 }
 
@@ -167,10 +191,10 @@ a {
 }
 
 .painting-author {
-  font-size: 17px;
-  color: #6b6b6b;
   margin-bottom: 32px;
   padding-bottom: 32px;
+  font-size: 17px;
+  color: #6b6b6b;
   border-bottom: 1px solid #e0d8c9;
 }
 
@@ -184,8 +208,8 @@ a {
   justify-content: space-between;
   gap: 16px;
   padding: 12px 0;
-  border-bottom: 1px solid #e0d8c9;
   font-size: 15px;
+  border-bottom: 1px solid #e0d8c9;
 }
 
 .painting-facts .label {
@@ -196,58 +220,20 @@ a {
   margin-top: 16px;
 }
 
-/* Футер */
-.site-footer {
-  border-top: 1px solid #e0d8c9;
-  padding: 40px 0;
-  margin-top: 40px;
-}
-
-.site-footer .container {
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  flex-wrap: wrap;
-  font-size: 14px;
-  color: #6b6b6b;
-}
-
-/* Адаптив */
-@media (max-width: 800px) {
-  .painting-layout {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .catalog {
-    padding: 40px 0 60px;
-  }
-
-  .catalog-head h1 {
-    font-size: 32px;
-  }
-
-  .painting-info h1 {
-    font-size: 28px;
-  }
-}
-
-/* Форма поиска */
 .search-form {
   display: flex;
   gap: 12px;
-  margin-bottom: 40px;
   max-width: 520px;
+  margin-bottom: 40px;
 }
 
 .search-input {
   flex: 1;
   padding: 12px 16px;
-  font-size: 15px;
-  font-family: Arial, sans-serif;
-  border: 1px solid #e0d8c9;
-  background: #fff;
+  font: 15px Arial, sans-serif;
   color: #1a1a1a;
+  background: #fff;
+  border: 1px solid #e0d8c9;
   outline: none;
 }
 
@@ -257,10 +243,9 @@ a {
 
 .search-form button {
   padding: 12px 24px;
-  font-size: 15px;
-  font-family: Arial, sans-serif;
-  background: #1a1a1a;
+  font: 15px Arial, sans-serif;
   color: #fff;
+  background: #1a1a1a;
   border: none;
   cursor: pointer;
 }
@@ -270,20 +255,59 @@ a {
 }
 
 .search-reset {
-  padding: 12px 0;
+  align-self: center;
   font-size: 14px;
   color: #6b6b6b;
-  align-self: center;
 }
 
 .search-reset:hover {
   color: #1a1a1a;
 }
 
-/* Тёмная тема */
+.site-footer {
+  margin-top: 40px;
+  padding: 40px 0;
+  border-top: 1px solid #e0d8c9;
+}
+
+.site-footer .container {
+  display: flex;
+  justify-content: right;
+  flex-wrap: wrap;
+  gap: 24px;
+  font-size: 14px;
+  color: #6b6b6b;
+}
+
+.recent {
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid #e0d8c9;
+}
+
+.recent h2 {
+  font-family: Georgia, serif;
+  font-size: 28px;
+  font-weight: normal;
+  margin-bottom: 32px;
+}
+
+.section-title {
+  font-family: Georgia, serif;
+  font-size: 28px;
+  font-weight: normal;
+  margin-bottom: 32px;
+}
+
+.catalog-section {
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid #e0d8c9;
+}
+
 .theme-dark {
-  background: #1a1a1a;
   color: #f0ebe1;
+  background: #1a1a1a;
 }
 
 .theme-dark .site-header,
@@ -291,7 +315,9 @@ a {
 .theme-dark .card-image,
 .theme-dark .painting-figure,
 .theme-dark .painting-facts li,
-.theme-dark .painting-author {
+.theme-dark .painting-author,
+.theme-dark .recent,
+.theme-dark .catalog-section {
   border-color: #333;
 }
 
@@ -300,7 +326,6 @@ a {
   background: #242424;
 }
 
-.theme-dark .nav a,
 .theme-dark .card-meta,
 .theme-dark .catalog-head p,
 .theme-dark .painting-author,
@@ -311,56 +336,42 @@ a {
   color: #a0a0a0;
 }
 
-.theme-dark .nav a:hover,
 .theme-dark .painting-back:hover,
 .theme-dark .search-reset:hover {
   color: #f0ebe1;
 }
 
 .theme-dark .search-input {
+  color: #f0ebe1;
   background: #242424;
   border-color: #333;
-  color: #f0ebe1;
 }
 
 .theme-dark .search-form button {
-  background: #f0ebe1;
   color: #1a1a1a;
+  background: #f0ebe1;
 }
 
 .theme-dark .search-form button:hover {
-  background: #8b6f47;
   color: #fff;
+  background: #8b6f47;
 }
 
-/* Кнопка переключения темы */
-.theme-toggle {
-  font-size: 14px;
-  color: #6b6b6b;
-}
+@media (max-width: 800px) {
+  .catalog {
+    padding: 40px 0 60px;
+  }
 
-.theme-toggle:hover {
-  color: #1a1a1a;
-}
+  .catalog-head h1 {
+    font-size: 32px;
+  }
 
-.theme-dark .theme-toggle:hover {
-  color: #f0ebe1;
-}
+  .painting-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
 
-/* Блок недавно просмотренных */
-.recent {
-  margin-top: 60px;
-  padding-top: 40px;
-  border-top: 1px solid #e0d8c9;
-}
-
-.theme-dark .recent {
-  border-color: #333;
-}
-
-.recent h2 {
-  font-family: Georgia, serif;
-  font-size: 28px;
-  font-weight: normal;
-  margin-bottom: 32px;
+  .painting-info h1 {
+    font-size: 28px;
+  }
 }
